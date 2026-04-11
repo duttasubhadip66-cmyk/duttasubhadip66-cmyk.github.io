@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subhadip Dutta — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f3;
+    --bg-info: #e6f1fb;
+    --tp: #1a1a18;
+    --ts: #5f5e5a;
+    --tt: #888780;
+    --ti: #185fa5;
+    --bd: rgba(0,0,0,0.12);
+    --bds: rgba(0,0,0,0.22);
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-mid: #5DCAA5;
+    --green-pale: #9FE1CB;
+    --green-dark: #0F6E56;
+    --green-deep: #085041;
+    --r: 8px;
+    --rl: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg2: #252523;
+      --bg-info: #0c447c22;
+      --tp: #f0ede6;
+      --ts: #b4b2a9;
+      --tt: #888780;
+      --ti: #85b7eb;
+      --bd: rgba(255,255,255,0.10);
+      --bds: rgba(255,255,255,0.18);
+      --green-light: #04342C;
+      --green-mid: #1D9E75;
+      --green-pale: #085041;
+    }
+  }
+
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--tp); -webkit-font-smoothing: antialiased; }
+
+  .pf { max-width: 900px; margin: 0 auto; padding: 0 0 5rem; }
+
+  /* HERO */
+  .hero-wrap { position: relative; overflow: hidden; padding: 3rem 2.5rem 2.5rem; border-bottom: 0.5px solid var(--bd); }
+  .hero-graphic { position: absolute; top: 0; right: 0; width: 340px; height: 100%; pointer-events: none; }
+  .hero-content { position: relative; z-index: 1; max-width: 540px; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .eyebrow-txt { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ts); }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.05; color: var(--tp); margin-bottom: 0.5rem; }
+  .hero-name span { font-style: italic; color: var(--green); }
+  .hero-role { font-size: 14px; color: var(--ts); line-height: 1.7; max-width: 460px; margin-bottom: 1.5rem; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+  .pill { font-size: 11px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--bds); color: var(--ts); background: var(--bg2); }
+  .pill.active { background: var(--green-light); border-color: var(--green-mid); color: var(--green-deep); }
+  .contact-row { display: flex; flex-wrap: wrap; gap: 16px; }
+  .contact-a { font-size: 12px; color: var(--ts); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid var(--bd); transition: color 0.15s, border-color 0.15s; }
+  .contact-a:hover { color: var(--green); border-color: var(--green); }
+
+  /* BODY */
+  .body { padding: 0 2.5rem; }
+  .sec { padding: 2rem 0; border-bottom: 0.5px solid var(--bd); }
+  .sec:last-child { border-bottom: none; }
+  .sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 1.4rem; }
+  .sec-icon { width: 28px; height: 28px; border-radius: 6px; background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sec-icon svg { width: 14px; height: 14px; stroke: var(--green-dark); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .sec-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tt); }
+
+  /* STATS */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg2); border-radius: var(--rl); padding: 1.1rem 1.25rem; position: relative; overflow: hidden; }
+  .stat-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--tp); line-height: 1; margin-bottom: 4px; }
+  .stat-lbl { font-size: 12px; color: var(--ts); line-height: 1.4; }
+
+  /* ABOUT */
+  .about-box { background: var(--bg2); border-left: 3px solid var(--green); border-radius: 0 var(--rl) var(--rl) 0; padding: 1.25rem 1.5rem; }
+  .about-txt { font-size: 14px; color: var(--ts); line-height: 1.75; }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; }
+  .tl-item { display: grid; grid-template-columns: 120px 24px 1fr; gap: 0; }
+  .tl-left { padding: 0 1.2rem 2rem 0; text-align: right; }
+  .tl-date { font-size: 11px; color: var(--tt); line-height: 1.5; margin-top: 3px; }
+  .tl-co { font-size: 11px; color: var(--green); margin-top: 3px; font-weight: 500; }
+  .tl-center { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 4px; }
+  .tl-dot.gray { background: var(--bd); border: 1px solid var(--bds); }
+  .tl-line { width: 1px; flex: 1; background: var(--bd); margin-top: 4px; }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-right { padding: 0 0 2rem 1.2rem; }
+  .tl-title { font-size: 15px; font-weight: 500; color: var(--tp); margin-bottom: 6px; }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .tl-bullets li { font-size: 13px; color: var(--ts); line-height: 1.55; padding-left: 12px; position: relative; }
+  .tl-bullets li::before { content: "·"; position: absolute; left: 0; color: var(--green); font-size: 18px; line-height: 1.1; }
+  .tl-badge { display: inline-block; font-size: 10px; background: var(--green-light); color: var(--green-deep); border-radius: 4px; padding: 2px 7px; margin-top: 6px; letter-spacing: 0.04em; }
+
+  /* SKILLS */
+  .skills-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .sk-card { background: var(--bg2); border-radius: var(--rl); padding: 1rem 1.25rem; }
+  .sk-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .sk-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .sk-name { font-size: 12px; font-weight: 500; color: var(--tp); }
+  .sk-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .sk-tag { font-size: 11px; color: var(--ts); background: var(--bg); border: 0.5px solid var(--bd); border-radius: 999px; padding: 3px 9px; }
+
+  /* EDUCATION */
+  .edu-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .edu-card { border: 0.5px solid var(--bd); border-radius: var(--rl); padding: 1rem 1.25rem; background: var(--bg); transition: border-color 0.15s; }
+  .edu-card:hover { border-color: var(--bds); }
+  .edu-icon-row { margin-bottom: 8px; }
+  .edu-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--green-light); display: flex; align-items: center; justify-content: center; }
+  .edu-icon svg { width: 14px; height: 14px; stroke: var(--green-dark); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .edu-deg { font-size: 14px; font-weight: 500; color: var(--tp); line-height: 1.35; margin-bottom: 4px; }
+  .edu-school { font-size: 12px; color: var(--ts); }
+  .edu-yr { font-size: 11px; color: var(--tt); margin-top: 3px; }
+
+  /* CERTS */
+  .cert-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cert-chip { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ts); background: var(--bg2); border: 0.5px solid var(--bd); border-radius: 8px; padding: 8px 12px; }
+  .cert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .cert-dot.amber { background: #BA7517; }
+
+  /* LANGUAGES */
+  .lang-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .lang-card { background: var(--bg2); border-radius: var(--rl); padding: 14px 20px; min-width: 90px; text-align: center; }
+  .lang-script { font-size: 18px; color: var(--tt); margin-bottom: 4px; line-height: 1; }
+  .lang-n { font-size: 14px; font-weight: 500; color: var(--tp); }
+  .lang-l { font-size: 11px; color: var(--tt); margin-top: 2px; }
+  .lang-bar { height: 3px; border-radius: 3px; background: var(--bd); margin-top: 8px; overflow: hidden; }
+  .lang-fill { height: 100%; border-radius: 3px; background: var(--green); }
+
+  /* CTA */
+  .cta-wrap { text-align: center; padding: 2.5rem 2.5rem 0; }
+  .cta-lbl { font-size: 13px; color: var(--ts); margin-bottom: 1rem; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--tp); background: var(--bg2); border: 0.5px solid var(--bds); border-radius: 8px; padding: 10px 22px; text-decoration: none; transition: background 0.15s; }
+  .cta-btn:hover { background: var(--bg); }
+  .cta-arrow { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (max-width: 620px) {
+    .hero-wrap, .body, .cta-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .hero-graphic { width: 180px; opacity: 0.4; }
+    .hero-name { font-size: 2.2rem; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .skills-wrap, .edu-row { grid-template-columns: 1fr; }
+    .tl-item { grid-template-columns: 80px 20px 1fr; }
+    .tl-left { padding-right: 0.8rem; }
+    .tl-right { padding-left: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="pf">
+
+  <div class="hero-wrap">
+    <svg class="hero-graphic" viewBox="0 0 340 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="290" cy="50" r="130" fill="#E1F5EE" opacity="0.5"/>
+      <circle cx="310" cy="220" r="70" fill="#9FE1CB" opacity="0.3"/>
+      <circle cx="190" cy="25" r="45" fill="#5DCAA5" opacity="0.2"/>
+      <circle cx="250" cy="130" r="35" fill="#1D9E75" opacity="0.12"/>
+      <rect x="210" y="85" width="65" height="65" rx="14" fill="#E1F5EE" opacity="0.65"/>
+      <rect x="255" y="170" width="45" height="45" rx="10" fill="#9FE1CB" opacity="0.45"/>
+      <rect x="168" y="55" width="32" height="32" rx="7" fill="#5DCAA5" opacity="0.35"/>
+      <line x1="232" y1="118" x2="260" y2="170" stroke="#1D9E75" stroke-width="0.5" opacity="0.4"/>
+      <line x1="184" y1="71" x2="214" y2="90" stroke="#1D9E75" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="232" cy="118" r="3" fill="#1D9E75" opacity="0.5"/>
+      <circle cx="260" cy="170" r="3" fill="#1D9E75" opacity="0.5"/>
+      <circle cx="184" cy="71" r="2.5" fill="#0F6E56" opacity="0.45"/>
+      <circle cx="214" cy="90" r="2" fill="#0F6E56" opacity="0.35"/>
+      <circle cx="278" cy="215" r="5" fill="#1D9E75" opacity="0.25"/>
+      <circle cx="220" cy="250" r="3" fill="#5DCAA5" opacity="0.3"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-dot"></div>
+        <span class="eyebrow-txt">Open to opportunities · Bengaluru</span>
+      </div>
+      <h1 class="hero-name">Subhadip<br><span>Dutta</span></h1>
+      <p class="hero-role">Operations &amp; Pricing Analyst · Mainframe Console Operator at Kyndryl · Japanese Language Professional · Aspiring Cloud Practitioner</p>
+      <div class="pill-row">
+        <span class="pill active">JLPT N3 Certified</span>
+        <span class="pill active">Amazon JP Alum</span>
+        <span class="pill">MCA in Progress</span>
+        <span class="pill">Cloud Enthusiast</span>
+      </div>
+      <div class="contact-row">
+        <a class="contact-a" href="mailto:duttasubhadip800@gmail.com">duttasubhadip800@gmail.com</a>
+        <a class="contact-a" href="https://www.linkedin.com/in/subhadip-dutta-a40bb222a/" target="_blank">LinkedIn</a>
+        <span class="contact-a">+91-8637564605</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5h6M5 11h4"/></svg></div>
+        <span class="sec-title">At a glance</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-accent" style="background:#1D9E75;"></div>
+          <div class="stat-num">2+</div>
+          <div class="stat-lbl">Years of professional experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-accent" style="background:#5DCAA5;"></div>
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">Audit accuracy at Amazon</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-accent" style="background:#9FE1CB;"></div>
+          <div class="stat-num">$10K+</div>
+          <div class="stat-lbl">Annual savings via automation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg></div>
+        <span class="sec-title">About</span>
+      </div>
+      <div class="about-box">
+        <p class="about-txt">Detail-oriented Operations &amp; Pricing Analyst with hands-on experience in Amazon JP Marketplace, contract auditing, and process automation using Excel VBA and Python. Currently serving as a Mainframe Console Operator at Kyndryl India, supporting Japanese enterprise clients. JLPT N3 certified with N2 in progress. Pursuing an MCA with a strong focus on Cloud Computing — actively building expertise through IBM and Google certifications.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><path d="M3 13V6l5-3 5 3v7"/><rect x="6" y="9" width="4" height="4"/></svg></div>
+        <span class="sec-title">Experience</span>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-date">Mar 2026<br>Present</div>
+            <div class="tl-co">Kyndryl</div>
+          </div>
+          <div class="tl-center"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-right">
+            <div class="tl-title">Mainframe Console Operator</div>
+            <ul class="tl-bullets">
+              <li>Monitor mainframe systems for Japanese enterprise clients</li>
+              <li>Respond to alerts and escalate incidents per SLA</li>
+              <li>Communicate with Japanese stakeholders for incident reporting</li>
+              <li>Document events and recovery steps for knowledge transfer</li>
+            </ul>
+            <span class="tl-badge">Current role</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-date">Dec 2023<br>Mar 2026</div>
+            <div class="tl-co">Amazon</div>
+          </div>
+          <div class="tl-center"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-right">
+            <div class="tl-title">Associate – Pricing Analyst &amp; Customer Support (JP)</div>
+            <ul class="tl-bullets">
+              <li>Led Japanese contract audits (DARI) ensuring financial accuracy</li>
+              <li>Built automation with Excel VBA, Python &amp; GenAI — $10K+ annual savings</li>
+              <li>Maintained 100% audit accuracy across all workflows</li>
+              <li>Trained 10–15 new hires; maintained SOPs</li>
+              <li>Promoted within 2 years based on performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-date">Nov–Dec<br>2023</div>
+            <div class="tl-co">Texeg India</div>
+          </div>
+          <div class="tl-center"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+          <div class="tl-right">
+            <div class="tl-title">Japanese Language Interpreter (Freelance)</div>
+            <ul class="tl-bullets">
+              <li>Real-time Japanese–English interpretation for business meetings and legal proceedings</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-date">Aug–Oct<br>2023</div>
+            <div class="tl-co">Fidel Tech</div>
+          </div>
+          <div class="tl-center"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+          <div class="tl-right">
+            <div class="tl-title">NLP Rewriting Specialist – Amazon Alexa (Freelance)</div>
+            <ul class="tl-bullets">
+              <li>Restructured AI responses to improve contextual accuracy for Alexa</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><path d="M2 13l4-4 3 3 5-6"/></svg></div>
+        <span class="sec-title">Skills</span>
+      </div>
+      <div class="skills-wrap">
+        <div class="sk-card">
+          <div class="sk-head"><div class="sk-dot" style="background:#1D9E75;"></div><span class="sk-name">Automation &amp; Programming</span></div>
+          <div class="sk-tags"><span class="sk-tag">Excel VBA</span><span class="sk-tag">Python</span><span class="sk-tag">GenAI tools</span><span class="sk-tag">Data scraping</span></div>
+        </div>
+        <div class="sk-card">
+          <div class="sk-head"><div class="sk-dot" style="background:#378ADD;"></div><span class="sk-name">Cloud &amp; Technology</span></div>
+          <div class="sk-tags"><span class="sk-tag">Cloud fundamentals</span><span class="sk-tag">Mainframe ops</span><span class="sk-tag">AI fundamentals</span><span class="sk-tag">ITSM / SLA</span></div>
+        </div>
+        <div class="sk-card">
+          <div class="sk-head"><div class="sk-dot" style="background:#BA7517;"></div><span class="sk-name">Productivity Tools</span></div>
+          <div class="sk-tags"><span class="sk-tag">Advanced Excel</span><span class="sk-tag">PowerPoint</span><span class="sk-tag">MS Office</span><span class="sk-tag">Teams</span></div>
+        </div>
+        <div class="sk-card">
+          <div class="sk-head"><div class="sk-dot" style="background:#7F77DD;"></div><span class="sk-name">Core Competencies</span></div>
+          <div class="sk-tags"><span class="sk-tag">Pricing analysis</span><span class="sk-tag">Contract auditing</span><span class="sk-tag">Process automation</span><span class="sk-tag">SOP development</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><path d="M2 12l6-8 6 8"/><path d="M5 12V9h6v3"/></svg></div>
+        <span class="sec-title">Education</span>
+      </div>
+      <div class="edu-row">
+        <div class="edu-card">
+          <div class="edu-icon-row">
+            <div class="edu-icon"><svg viewBox="0 0 16 16"><path d="M2 12l6-8 6 8"/><path d="M5 12V9h6v3"/></svg></div>
+          </div>
+          <div class="edu-deg">Master of Computer Applications (MCA)</div>
+          <div class="edu-school">Integral University</div>
+          <div class="edu-yr">Expected 2028</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-icon-row">
+            <div class="edu-icon"><svg viewBox="0 0 16 16"><path d="M2 12l6-8 6 8"/><path d="M5 12V9h6v3"/></svg></div>
+          </div>
+          <div class="edu-deg">B.A. (Hons.) Japanese Language, Culture &amp; Literature</div>
+          <div class="edu-school">Visva-Bharati University</div>
+          <div class="edu-yr">2019 – 2023</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="8" rx="1"/><path d="M5 4V3a1 1 0 012 0v1M9 4V3a1 1 0 012 0v1"/></svg></div>
+        <span class="sec-title">Certifications</span>
+      </div>
+      <div class="cert-row">
+        <div class="cert-chip"><div class="cert-dot"></div>JLPT N3 Certified</div>
+        <div class="cert-chip"><div class="cert-dot amber"></div>JLPT N2 — In Progress</div>
+        <div class="cert-chip"><div class="cert-dot"></div>Cloud Computing — IBM</div>
+        <div class="cert-chip"><div class="cert-dot"></div>Intro to AI — Google</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c-2 2-3 4-3 6s1 4 3 6M8 2c2 2 3 4 3 6s-1 4-3 6"/></svg></div>
+        <span class="sec-title">Languages</span>
+      </div>
+      <div class="lang-row">
+        <div class="lang-card">
+          <div class="lang-script">বাং</div>
+          <div class="lang-n">Bengali</div>
+          <div class="lang-l">Native</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%;"></div></div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-script">En</div>
+          <div class="lang-n">English</div>
+          <div class="lang-l">Fluent</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:95%;"></div></div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-script">हि</div>
+          <div class="lang-n">Hindi</div>
+          <div class="lang-l">Fluent</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:90%;"></div></div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-script">日本</div>
+          <div class="lang-n">Japanese</div>
+          <div class="lang-l">N3 · Professional</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:65%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-wrap">
+    <p class="cta-lbl">Have an opportunity to discuss?</p>
+    <a class="cta-btn" href="mailto:duttasubhadip800@gmail.com">
+      Get in touch
+      <svg class="cta-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
